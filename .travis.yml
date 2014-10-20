@@ -3,6 +3,6 @@ node_js:
   - "0.10"
 install:
   - "npm install -g coffee-script"
-  - "nstall -g mocha"
+  - "npm install -g mocha"
 script:
   - "cake test"
