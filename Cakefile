@@ -7,6 +7,7 @@ task 'test', ->
 
 task 'build', ->
   exec 'coffee --compile APIBlueprintImporter.coffee'
+  console.log "APIBlueprintImporter.js has been built."
 
 task 'watch', ->
   exec 'coffee --watch --compile APIBlueprintImporter.coffee'

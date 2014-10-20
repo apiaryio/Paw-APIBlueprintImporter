@@ -94,31 +94,7 @@ describe 'API Blueprint Importer Paw Extension', ->
     before ->
       @context = new Context()
 
-    describe 'with a single example', ->
-      before ->
-        action = {
-          "name": "Retrieve a Message",
-          "method": "GET",
-          "parameters": [],
-          "examples": [
-            {
-              "name": "Example",
-            },
-          ],
-        }
-        importer = new APIBlueprintImporter()
-        @request = importer.importResourceAction(@context, "http://api.acme.com/message", action)
-
-      it 'should return a request with a name', ->
-        assert.equal(@request.name, "Example")
-
-      it 'should return a request with a method', ->
-        assert.equal(@request.method, "GET")
-
-      it 'should return a request with a URL', ->
-        assert.equal(@request.url, "http://api.acme.com/message")
-
-    describe 'with multiple example', ->
+    describe 'with an example', ->
       before ->
         action = {
           "name": "Retrieve a Message",
@@ -183,44 +159,7 @@ describe 'API Blueprint Importer Paw Extension', ->
       it 'should configure the URL', ->
         assert.equal(@request.url, "http://api.acme.com/message")
 
-    describe 'with a single example request', ->
-      before ->
-        example = {
-          "name": "Awesome example",
-          "requests": [
-            {
-              "name": "Update Plain Text Message",
-              "headers": [
-                {
-                  "name": "Content-Type",
-                  "value": "text/plain",
-                },
-              ],
-              "body": "All your base are belong to us.",
-            },
-          ],
-        }
-        importer = new APIBlueprintImporter()
-        @request = importer.importExample(@context, "GET", "http://api.acme.com/message", example)
-
-      it 'should create a request with a name', ->
-        assert.equal(@request.name, "Update Plain Text Message")
-
-      it 'should configure the method', ->
-        assert.equal(@request.method, "GET")
-
-      it 'should configure the URL', ->
-        assert.equal(@request.url, "http://api.acme.com/message")
-
-      it 'should configure the headers', ->
-        assert.deepEqual(@request.headers, {
-          "Content-Type": "text/plain",
-        })
-
-      it 'should configure the body', ->
-        assert.equal(@request.body, "All your base are belong to us.")
-
-    describe 'with multiple example request', ->
+    describe 'with an example request', ->
       before ->
         example = {
           "name": "Awesome example",

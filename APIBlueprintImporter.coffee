@@ -59,12 +59,6 @@ APIBlueprintImporter = ->
     url = baseHost + resource["uriTemplate"]
     # TODO: uriTemplate and parameters
 
-    if actions.length == 1
-      request = @importResourceAction(context, url, actions[0])
-      if request.name.length == 0
-        request.name = name
-      return request
-
     requestGroup = context.createRequestGroup(name)
     for action in actions
       request = @importResourceAction(context, url, action)
@@ -95,11 +89,7 @@ APIBlueprintImporter = ->
     console.log("Importing resource action '" + name + "' " + examples.length + " examples")
 
     requestGroup = context.createRequestGroup(name)
-    if examples.length == 1
-      request = @importExample(context, method, url, examples[0])
-      if request.name.length == 0
-        request.name = name
-    else if examples.length > 1
+    if examples.length > 0
         requestGroup = context.createRequestGroup(name)
         for example in examples
           request = @importExample(context, method, url, example)
@@ -133,18 +123,13 @@ APIBlueprintImporter = ->
     console.log("Importing example " + name)
 
     if requests != undefined && requests.length > 0
-      if requests.length > 1
-        requestGroup = context.createRequestGroup(name)
+      requestGroup = context.createRequestGroup(name)
 
-        for requestExample in requests
-          request = @importExampleRequest(context, method, url, requestExample)
-          requestGroup.appendChild(request)
+      for requestExample in requests
+        request = @importExampleRequest(context, method, url, requestExample)
+        requestGroup.appendChild(request)
 
-        return requestGroup
-
-      request = @importExampleRequest(context, method, url, requests[0])
-      if request.name.length == 0
-        request.name = name
+      return requestGroup
     else
       request = context.createRequest(name, method, url)
 
