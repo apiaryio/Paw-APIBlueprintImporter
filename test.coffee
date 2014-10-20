@@ -82,7 +82,7 @@ describe 'API Blueprint Importer Paw Extension', ->
       }
 
       importer = new APIBlueprintImporter()
-      @requestGroup = importer.importResource(@context, resource)
+      @requestGroup = importer.importResource(@context, "", resource)
 
     it 'should return a request group with a name', ->
       assert.equal(@requestGroup.name, 'My Messages')
@@ -107,7 +107,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           ],
         }
         importer = new APIBlueprintImporter()
-        @request = importer.importResourceAction(@context, action)
+        @request = importer.importResourceAction(@context, "http://api.acme.com/message", action)
 
       it 'should return a request with a name', ->
         assert.equal(@request.name, "Example")
@@ -134,7 +134,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           ],
         }
         importer = new APIBlueprintImporter()
-        @requestGroup = importer.importResourceAction(@context, action)
+        @requestGroup = importer.importResourceAction(@context, "", action)
 
       it 'should create a request group with a name', ->
         assert.equal(@requestGroup.name, 'Retrieve a Message')
@@ -151,7 +151,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           "examples": [],
         }
         importer = new APIBlueprintImporter()
-        @request = importer.importResourceAction(@context, action)
+        @request = importer.importResourceAction(@context, "http://api.acme.com/message", action)
 
       it 'should return a request with a name', ->
         assert.equal(@request.name, "Retrieve a Message")
