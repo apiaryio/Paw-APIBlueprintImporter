@@ -88,7 +88,6 @@ APIBlueprintImporter = ->
 
     console.log("Importing resource action '" + name + "' " + examples.length + " examples")
 
-    requestGroup = context.createRequestGroup(name)
     if examples.length > 0
         requestGroup = context.createRequestGroup(name)
         for example in examples
