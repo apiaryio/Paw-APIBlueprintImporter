@@ -181,10 +181,7 @@ APIBlueprintImporter = ->
       @importBlueprint context, blueprint
       return true
 
-    # TODO Handle failed request
-    console.log("HTTP Request failed: " + http_request.responseStatusCode)
-
-    return false
+    throw new Error "HTTP Request failed: " + http_request.responseStatusCode
 
   return
 
