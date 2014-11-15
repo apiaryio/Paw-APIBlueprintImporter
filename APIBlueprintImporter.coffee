@@ -185,10 +185,9 @@ APIBlueprintImporter = ->
   return
 
 APIBlueprintImporter.identifier = "io.apiary.PawExtensions.APIBlueprintImporter"
-APIBlueprintImporter.title = "API Blueprint (Importer)"
+APIBlueprintImporter.title = "API Blueprint Importer"
 
 if typeof registerImporter != 'undefined'
   registerImporter APIBlueprintImporter
 else if typeof module != 'undefined'
   module.exports = APIBlueprintImporter
-

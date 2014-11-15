@@ -139,7 +139,7 @@
 
   APIBlueprintImporter.identifier = "io.apiary.PawExtensions.APIBlueprintImporter";
 
-  APIBlueprintImporter.title = "API Blueprint (Importer)";
+  APIBlueprintImporter.title = "API Blueprint Importer";
 
   if (typeof registerImporter !== 'undefined') {
     registerImporter(APIBlueprintImporter);
