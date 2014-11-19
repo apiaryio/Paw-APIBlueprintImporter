@@ -1,5 +1,5 @@
-Paw APIBlueprint Importer Extension
-===================================
+Paw API Blueprint Importer Extension
+====================================
 
 [![Build Status](http://img.shields.io/travis/apiaryio/Paw-APIBlueprintImporter/master.svg?style=flat)](https://travis-ci.org/apiaryio/Paw-APIBlueprintImporter)
 
