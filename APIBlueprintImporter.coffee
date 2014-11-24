@@ -30,7 +30,7 @@ APIBlueprintImporter = ->
   # @returns [RequestGroup] A PAW Request group
   #
   @importResourceGroup = (context, baseHost, resourceGroup) ->
-    name = resourceGroup["name"]
+    name = resourceGroup["name"] || "Unnamed"
     resources = resourceGroup["resources"]
 
     console.log("Importing resource group " + name)
@@ -51,7 +51,7 @@ APIBlueprintImporter = ->
   # @return [Request,RequestGroup] Returns the imported request group
   #
   @importResource = (context, baseHost, resource) ->
-    name = resource["name"]
+    name = resource["name"] || "Unnamed"
     actions = resource["actions"]
 
     console.log("Importing resource " + name)
@@ -144,7 +144,7 @@ APIBlueprintImporter = ->
   # @returns [Request] A Paw Request, created from the example request
   #
   @importExampleRequest = (context, method, url, exampleRequest) ->
-    name = exampleRequest["name"]
+    name = exampleRequest["name"] || "Unnamed"
     exampleHeaders = exampleRequest["headers"]
     body = exampleRequest["body"]
 

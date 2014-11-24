@@ -25,7 +25,7 @@
     };
     this.importResourceGroup = function(context, baseHost, resourceGroup) {
       var name, request, requestGroup, resource, resources, _i, _len;
-      name = resourceGroup["name"];
+      name = resourceGroup["name"] || "Unnamed";
       resources = resourceGroup["resources"];
       console.log("Importing resource group " + name);
       requestGroup = context.createRequestGroup(name);
@@ -38,7 +38,7 @@
     };
     this.importResource = function(context, baseHost, resource) {
       var action, actions, name, request, requestGroup, url, _i, _len;
-      name = resource["name"];
+      name = resource["name"] || "Unnamed";
       actions = resource["actions"];
       console.log("Importing resource " + name);
       url = baseHost + resource["uriTemplate"];
@@ -101,7 +101,7 @@
     };
     this.importExampleRequest = function(context, method, url, exampleRequest) {
       var body, exampleHeaders, header, headers, key, name, request, value, _i, _len;
-      name = exampleRequest["name"];
+      name = exampleRequest["name"] || "Unnamed";
       exampleHeaders = exampleRequest["headers"];
       body = exampleRequest["body"];
       console.log("Importing example request " + name);
