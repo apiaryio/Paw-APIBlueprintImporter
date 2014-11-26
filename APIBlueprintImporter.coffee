@@ -9,11 +9,14 @@ APIBlueprintImporter = ->
   @importBlueprint = (context, blueprint) ->
     ast = blueprint["ast"]
     metadata = ast["metadata"]
-    baseHost = ""
+    baseHost = null
 
     for metadata in ast["metadata"]
       if metadata["name"] == "HOST"
           baseHost = metadata["value"]
+
+    if not baseHost
+        baseHost = "http://my-host.com"
 
     # TODO make real base host
     resourceGroups = ast["resourceGroups"]
@@ -171,7 +174,7 @@ APIBlueprintImporter = ->
     http_request = new NetworkHTTPRequest()
     http_request.requestUrl = "https://api.apiblueprint.org/parser"
     http_request.requestMethod = "POST"
-    http_request.requestTimeout = 3600
+    http_request.requestTimeout = 3600000
     http_request.requestBody = string
     http_request.setRequestHeader "Content-Type", "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
     http_request.setRequestHeader "Accept", "application/vnd.apiblueprint.parseresult.raw+json"
