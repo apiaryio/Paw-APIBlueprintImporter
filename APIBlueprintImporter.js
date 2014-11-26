@@ -7,13 +7,16 @@
       var ast, baseHost, metadata, resourceGroup, resourceGroups, _i, _j, _len, _len1, _ref, _results;
       ast = blueprint["ast"];
       metadata = ast["metadata"];
-      baseHost = "";
+      baseHost = null;
       _ref = ast["metadata"];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         metadata = _ref[_i];
         if (metadata["name"] === "HOST") {
           baseHost = metadata["value"];
         }
+      }
+      if (!baseHost) {
+        baseHost = "http://my-host.com";
       }
       resourceGroups = ast["resourceGroups"];
       _results = [];
@@ -124,7 +127,7 @@
       http_request = new NetworkHTTPRequest();
       http_request.requestUrl = "https://api.apiblueprint.org/parser";
       http_request.requestMethod = "POST";
-      http_request.requestTimeout = 3600;
+      http_request.requestTimeout = 3600000;
       http_request.requestBody = string;
       http_request.setRequestHeader("Content-Type", "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8");
       http_request.setRequestHeader("Accept", "application/vnd.apiblueprint.parseresult.raw+json");
