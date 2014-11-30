@@ -1,8 +1,19 @@
 language: node_js
 node_js:
-  - "0.10"
-install:
-  - "npm install -g coffee-script"
-  - "npm install -g mocha"
+- '0.10'
+before_install:
+- npm install coffee-script
+before_script:
+- ./node_modules/.bin/cake archive
 script:
-  - "cake test"
+- ./node_modules/.bin/cake test
+deploy:
+  provider: releases
+  api_key:
+    secure: CtQ7v+q6DG7xQw3h1DfXhodjAWxNj4m0gQ1ajl1JoSZvz9ANcLTuVrdkSEzNuUDL/Ysez295ro8OtUwBDubVJxcT3BKPTa8d2XpYjsCHUhPCzJdWfU0N7ZkxELCy6TTVNLaLsLYJyhYHwezETWhAQXnRgNDVrYHoHpsO6XfPrRY=
+  file: build/APIBlueprintImporter.zip
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    repo: apiaryio/Paw-APIBlueprintImporter
