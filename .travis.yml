@@ -10,7 +10,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: CtQ7v+q6DG7xQw3h1DfXhodjAWxNj4m0gQ1ajl1JoSZvz9ANcLTuVrdkSEzNuUDL/Ysez295ro8OtUwBDubVJxcT3BKPTa8d2XpYjsCHUhPCzJdWfU0N7ZkxELCy6TTVNLaLsLYJyhYHwezETWhAQXnRgNDVrYHoHpsO6XfPrRY=
+    secure: MquKZgLKLq/SxxjCyF/yN8nvptqq0HgNtUAtCmyHZ6ZfQhaJ8Xd/yECEvLzo5f9FKq72SPc1Qj/GWoWwAhDqoqvlqZg1kcBS9dJBJMWgUeYeXYdqMXmvbUuqJ3erhUdDxdxeQ7e/XW05t/v/AMNuvYrwuKxopBAWKF9UCXeJ1/E=
   file: build/APIBlueprintImporter.zip
   skip_cleanup: true
   on:
