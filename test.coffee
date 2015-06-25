@@ -110,7 +110,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           ],
         }
         importer = new APIBlueprintImporter()
-        @requestGroup = importer.importResourceAction(@context, "", action)
+        @requestGroup = importer.importResourceAction(@context, "", "", action)
 
       it 'should create a request group with a name', ->
         assert.equal(@requestGroup.name, 'Retrieve a Message')
@@ -127,7 +127,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           "examples": [],
         }
         importer = new APIBlueprintImporter()
-        @request = importer.importResourceAction(@context, "http://api.acme.com/message", action)
+        @request = importer.importResourceAction(@context, "", "http://api.acme.com/message", action)
 
       it 'should return a request with a name', ->
         assert.equal(@request.name, "Retrieve a Message")
@@ -137,6 +137,29 @@ describe 'API Blueprint Importer Paw Extension', ->
 
       it 'should return a request with a URL', ->
         assert.equal(@request.url, "http://api.acme.com/message")
+
+    describe 'with its own URI', ->
+      before ->
+        action = {
+          "name": "Retrieve a Message",
+          "method": "GET",
+          "parameters": [],
+          "examples": [],
+          "attributes": {
+              "uriTemplate": "/other"
+          }
+        }
+        importer = new APIBlueprintImporter()
+        @request = importer.importResourceAction(@context, "http://api.acme.com", "http://api.acme.com/message", action)
+
+      it 'should return a request with a name', ->
+        assert.equal(@request.name, "Retrieve a Message")
+
+      it 'should return a request with a method', ->
+        assert.equal(@request.method, "GET")
+
+      it 'should return a request with a URL', ->
+        assert.equal(@request.url, "http://api.acme.com/other")
 
   describe 'when importing an example', ->
     before ->

@@ -64,7 +64,7 @@ APIBlueprintImporter = ->
 
     requestGroup = context.createRequestGroup(name)
     for action in actions
-      request = @importResourceAction(context, url, action)
+      request = @importResourceAction(context, baseHost, url, action)
       requestGroup.appendChild(request)
 
     return requestGroup
@@ -72,12 +72,13 @@ APIBlueprintImporter = ->
   # Imports an action from a blueprint.
   #
   # @param [Context] context Paw context
+  # @param [String] baseHost The blueprint's base host
   # @param [String] url Actions URL
   # @param [Object] action the blueprint action
   #
   # @return [Request,RequestGroup] Returns either a request or request group
   #
-  @importResourceAction = (context, url, action) ->
+  @importResourceAction = (context, baseHost, url, action) ->
     name = action["name"]
     if name.length == 0
       name = action["description"]
@@ -88,6 +89,12 @@ APIBlueprintImporter = ->
     examples = action["examples"]
     method = action["method"]
     # TODO uri templates
+
+    attributes = action['attributes']
+    if attributes
+      uriTemplate = attributes['uriTemplate']
+      if uriTemplate && uriTemplate.length > 0
+          url = baseHost + uriTemplate
 
     console.log("Importing resource action '" + name + "' " + examples.length + " examples")
 
