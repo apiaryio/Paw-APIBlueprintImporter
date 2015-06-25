@@ -12,7 +12,7 @@ build_dir = "#{ build_root_dir }/#{ identifier }"
 
 # compile CoffeeScript
 build_coffee = (callback) ->
-    coffee = spawn 'coffee', ['-c', '-o', build_dir, file]
+    coffee = spawn './node_modules/.bin/coffee', ['-c', '-o', build_dir, file]
     coffee.stderr.on 'data', (data) ->
         process.stderr.write data.toString()
     coffee.stdout.on 'data', (data) ->
@@ -74,9 +74,9 @@ task 'build', ->
     build()
 
 task 'test', ->
-  exec './node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register test.coffee', (err, output) ->
-    throw err if err
+  exec './node_modules/.bin/mocha --compilers coffee:coffee-script/register test.coffee', (err, output) ->
     console.log output
+    throw err if err
 
 task 'install', ->
     build () ->
