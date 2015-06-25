@@ -75,8 +75,8 @@ task 'build', ->
 
 task 'test', ->
   exec './node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register test.coffee', (err, output) ->
-    throw err if err
     console.log output
+    throw err if err
 
 task 'install', ->
     build () ->
