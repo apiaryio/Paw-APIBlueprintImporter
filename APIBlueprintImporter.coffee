@@ -30,20 +30,27 @@ APIBlueprintImporter = ->
   # @param [String] baseHost The blueprint's base host
   # @param [Object] resourceGroup The blueprint resource group
   #
-  # @returns [RequestGroup] A PAW Request group
+  # @returns [RequestGroup,Void] A PAW Request group
   #
   @importResourceGroup = (context, baseHost, resourceGroup) ->
-    name = resourceGroup["name"] || "Unnamed"
+    name = resourceGroup["name"]
     resources = resourceGroup["resources"]
 
-    console.log("Importing resource group " + name)
+    if name.length > 0
+      console.log("Importing resource group " + name)
+      requestGroup = context.createRequestGroup(name)
 
-    requestGroup = context.createRequestGroup(name)
+      for resource in resources
+        request = @importResource(context, baseHost, resource)
+        requestGroup.appendChild(request)
+
+      return requestGroup
+
+    console.log("Importing unnamed resource group")
+
     for resource in resources
-      request = @importResource(context, baseHost, resource)
-      requestGroup.appendChild(request)
+      @importResource(context, baseHost, resource)
 
-    return requestGroup
 
   # Imports a resource from a blueprint.
   #
@@ -54,7 +61,7 @@ APIBlueprintImporter = ->
   # @return [Request,RequestGroup] Returns the imported request group
   #
   @importResource = (context, baseHost, resource) ->
-    name = resource["name"] || "Unnamed"
+    name = resource["name"] || "Unnamed Resource"
     actions = resource["actions"]
 
     console.log("Importing resource " + name)
@@ -99,12 +106,15 @@ APIBlueprintImporter = ->
     console.log("Importing resource action '" + name + "' " + examples.length + " examples")
 
     if examples.length > 0
-        requestGroup = context.createRequestGroup(name)
-        for example in examples
-          request = @importExample(context, method, url, example)
-          requestGroup.appendChild(request)
+        if examples.length == 1
+          return @importExample(context, name, method, url, examples[0])
+        else
+          requestGroup = context.createRequestGroup(name)
+          for example in examples
+            request = @importExample(context, name, method, url, example)
+            requestGroup.appendChild(request)
 
-        return requestGroup
+          return requestGroup
     else
       request = context.createRequest(name, method, url)
 
@@ -113,32 +123,29 @@ APIBlueprintImporter = ->
   # Imports an example from a blueprint.
   #
   # @param [Context] context Paw context
+  # @param [String] name The name of the example
   # @param [String] method The method of the example request
   # @param [String] url The URL of the example request
   # @param [Object] example the blueprint example
   #
   # @return [Request,RequestGroup] Returns either a request or request group
   #
-  @importExample = (context, method, url, example) ->
-    name = example["name"]
+  @importExample = (context, name, method, url, example) ->
+    if example["name"].length > 0
+      name = example["name"]
     requests = example["requests"]
 
-    if name.length == 0
-      name = example["description"]
-
-      if name.length == 0
-        name = "Example"
-
-    console.log("Importing example " + name)
-
     if requests != undefined && requests.length > 0
-      requestGroup = context.createRequestGroup(name)
+      if requests.length == 1
+          return @importExampleRequest(context, name, method, url, requests[0])
+      else
+        requestGroup = context.createRequestGroup(name)
 
-      for requestExample in requests
-        request = @importExampleRequest(context, method, url, requestExample)
-        requestGroup.appendChild(request)
+        for requestExample in requests
+          request = @importExampleRequest(context, name, method, url, requestExample)
+          requestGroup.appendChild(request)
 
-      return requestGroup
+        return requestGroup
     else
       request = context.createRequest(name, method, url)
 
@@ -147,14 +154,17 @@ APIBlueprintImporter = ->
   # Imports an example request from a blueprint.
   #
   # @param [Context] context Paw context
+  # @param [String] name The name of the example request
   # @param [String] method The method of the example request
   # @param [String] url The URL of the example request
   # @param [Object] exampleRequest the blueprint example request
   #
   # @returns [Request] A Paw Request, created from the example request
   #
-  @importExampleRequest = (context, method, url, exampleRequest) ->
-    name = exampleRequest["name"] || "Unnamed"
+  @importExampleRequest = (context, name, method, url, exampleRequest) ->
+    if exampleRequest["name"].length > 0
+      name = exampleRequest["name"]
+
     exampleHeaders = exampleRequest["headers"]
     body = exampleRequest["body"]
 
