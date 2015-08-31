@@ -171,7 +171,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           "name": "Awesome example",
         }
         importer = new APIBlueprintImporter()
-        @request = importer.importExample(@context, "GET", "http://api.acme.com/message", example)
+        @request = importer.importExample(@context, null, "GET", "http://api.acme.com/message", example)
 
       it 'should create a request with a name', ->
         assert.equal(@request.name, "Awesome example")
@@ -210,7 +210,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           ],
         }
         importer = new APIBlueprintImporter()
-        @requestGroup = importer.importExample(@context, "GET", "http://api.acme.com/message", example)
+        @requestGroup = importer.importExample(@context, null, "GET", "http://api.acme.com/message", example)
         @request = @requestGroup.children[0]
 
       it 'should create a request group with a name', ->
@@ -221,24 +221,6 @@ describe 'API Blueprint Importer Paw Extension', ->
 
       it 'should create a request with a name', ->
         assert.equal(@request.name, "Update Plain Text Message")
-
-    it 'should use the description as a name if the name is ommitted', ->
-      example = {
-        "name": "",
-        "description": "Description!",
-      }
-      importer = new APIBlueprintImporter()
-      request = importer.importExample(@context, "GET", "http://api.acme.com/message", example)
-      assert.equal(request.name, "Description!")
-
-    it 'should use the name "example" if the name and description is ommitted', ->
-      example = {
-        "name": "",
-        "description": "",
-      }
-      importer = new APIBlueprintImporter()
-      request = importer.importExample(@context, "GET", "http://api.acme.com/message", example)
-      assert.equal(request.name, "Example")
 
   describe 'when importing an example request', ->
     before ->
@@ -255,7 +237,7 @@ describe 'API Blueprint Importer Paw Extension', ->
       }
 
       importer = new APIBlueprintImporter()
-      @request = importer.importExampleRequest(@context, "GET", "http://api.acme.com/message", exampleRequest)
+      @request = importer.importExampleRequest(@context, null, "GET", "http://api.acme.com/message", exampleRequest)
 
     it 'should have a name', ->
       assert.equal(@request.name, "Update Plain Text Message")
