@@ -8,7 +8,7 @@ for public consumption.
 
 ### Installation
 
-The [Paw extension](http://luckymarmot.com/paw/extensions/APIBlueprintImporter) can be installed with one simple step by clicking [here](paw://extensions/io.apiary.PawExtensions.APIBlueprintImporter?install).
+The [Paw extension](https://luckymarmot.com/paw/extensions/APIBlueprintImporter) can be installed from the [Paw extensions page](https://luckymarmot.com/paw/extensions/APIBlueprintImporter).
 
 #### Development Instructions
 
