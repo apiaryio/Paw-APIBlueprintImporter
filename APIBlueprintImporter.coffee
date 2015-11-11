@@ -4,7 +4,7 @@ APIBlueprintImporter = ->
   # Imports a blueprint.
   #
   # @param [Context] context Paw context
-  # @param [Object] blueprint application/vnd.apiblueprint.parseresult.raw+json
+  # @param [Object] blueprint application/vnd.apiblueprint.parseresult+json
   #
   @importBlueprint = (context, blueprint) ->
     ast = blueprint["ast"]
@@ -194,7 +194,7 @@ APIBlueprintImporter = ->
     http_request.requestTimeout = 3600000
     http_request.requestBody = string
     http_request.setRequestHeader "Content-Type", "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
-    http_request.setRequestHeader "Accept", "application/vnd.apiblueprint.parseresult.raw+json"
+    http_request.setRequestHeader "Accept", "application/vnd.apiblueprint.parseresult+json"
     if http_request.send() and (http_request.responseStatusCode is 200)
       blueprint = JSON.parse(http_request.responseBody)
       @importBlueprint context, blueprint
