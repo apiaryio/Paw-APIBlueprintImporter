@@ -1,3 +1,12 @@
+# Paw API v0.2.0 and below (Paw 2.2.2 and below) differences
+((root) ->
+  if root.bundle?.minApiVersion('0.2.0')
+    root.drafter = require './drafter.js'
+  else
+    drafter = require 'drafter.js'
+)(this)
+
+
 # PAW APIBlueprint extension
 APIBlueprintImporter = ->
 
@@ -188,19 +197,9 @@ APIBlueprintImporter = ->
   # @param [String] string Payload to import
   #
   @importString = (context, string) ->
-    http_request = new NetworkHTTPRequest()
-    http_request.requestUrl = "https://api.apiblueprint.org/parser"
-    http_request.requestMethod = "POST"
-    http_request.requestTimeout = 3600000
-    http_request.requestBody = string
-    http_request.setRequestHeader "Content-Type", "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
-    http_request.setRequestHeader "Accept", "application/vnd.apiblueprint.parseresult+json"
-    if http_request.send() and (http_request.responseStatusCode is 200)
-      blueprint = JSON.parse(http_request.responseBody)
-      @importBlueprint context, blueprint
-      return true
-
-    throw new Error "HTTP Request failed: " + http_request.responseStatusCode
+    result = drafter.parse(string, type: "ast")
+    @importBlueprint context, result
+    return true
 
   return
 
