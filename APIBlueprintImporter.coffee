@@ -199,8 +199,10 @@ APIBlueprintImporter = ->
       blueprint = JSON.parse(http_request.responseBody)
       @importBlueprint context, blueprint
       return true
-
-    throw new Error "HTTP Request failed: " + http_request.responseStatusCode
+    if (http_request.responseStatusCode is 422)
+      throw new Error "Parsing failed. Check your blueprint for either warning or errors."
+    else
+      throw new Error "HTTP Request failed: " + http_request.responseStatusCode
 
   return
 
