@@ -195,13 +195,17 @@ APIBlueprintImporter = ->
     http_request.requestBody = string
     http_request.setRequestHeader "Content-Type", "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
     http_request.setRequestHeader "Accept", "application/vnd.apiblueprint.parseresult+json"
-    if http_request.send() and (http_request.responseStatusCode is 200)
+    if http_request.send()
       blueprint = JSON.parse(http_request.responseBody)
-      @importBlueprint context, blueprint
-      return true
-
-    throw new Error "HTTP Request failed: " + http_request.responseStatusCode
-
+      if http_request.responseStatusCode is 200
+        # success. may have some warnings.
+        @importBlueprint context, blueprint
+        return true
+      else if (http_request.responseStatusCode is 422 and blueprint['error'] != null)
+        # some error happened
+        throw new Error "There are one or more errors in your blueprint. \n #{JSON.stringify(blueprint['error'])}"
+    else
+      throw new Error "HTTP Request failed: " + http_request.responseStatusCode
   return
 
 APIBlueprintImporter.identifier = "io.apiary.PawExtensions.APIBlueprintImporter"
