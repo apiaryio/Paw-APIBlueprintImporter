@@ -41,19 +41,19 @@ $ npm install
 During development, build the `.js` script using:
 
 ```bash
-$ cake build
+$ npm run build
 ```
 
 To install into the Paw Extension directory:
 
 ```bash
-$ cake install
+$ npm run install
 ```
 
 Alternatively, use the `watch` command to automatically build and install when a file has been modified:
 
 ```bash
-$ cake watch
+$ npm run watch
 ```
 
 ##### Tests
@@ -61,7 +61,7 @@ $ cake watch
 Run the tests:
 
 ```bash
-$ cake test
+$ npm test
 ```
 
 ### License
