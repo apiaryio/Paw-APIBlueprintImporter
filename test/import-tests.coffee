@@ -1,5 +1,5 @@
 assert = require('assert')
-APIBlueprintImporter = require('./APIBlueprintImporter.coffee')
+APIBlueprintImporter = require('../src/APIBlueprintImporter.coffee')
 
 # Mock PAW RequestGroup
 RequestGroup = ->

@@ -3,7 +3,7 @@
 mkdirp = require 'mkdirp'
 fs = require 'fs'
 
-file = 'APIBlueprintImporter.coffee'
+file = 'src/APIBlueprintImporter.coffee'
 identifier = 'io.apiary.PawExtensions.APIBlueprintImporter'
 
 extensions_dir = "#{ process.env.HOME }/Library/Containers/com.luckymarmot.Paw/Data/Library/Application Support/com.luckymarmot.Paw/Extensions/"
@@ -72,11 +72,6 @@ archive = (callback) ->
 
 task 'build', ->
     build()
-
-task 'test', ->
-  exec './node_modules/.bin/mocha --compilers coffee:coffee-script/register test.coffee', (err, output) ->
-    console.log output
-    throw err if err
 
 task 'install', ->
     build () ->

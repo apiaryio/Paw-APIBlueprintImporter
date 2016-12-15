@@ -12,7 +12,7 @@
     "url": "git@github.com:apiaryio/Paw-APIBlueprintGenerator.git"
   },
   "scripts": {
-    "test": "cake test",
+    "test": "mocha",
     "build": "cake build",
     "install": "cake install",
     "archive": "cake archive",
