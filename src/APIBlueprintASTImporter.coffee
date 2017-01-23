@@ -1,5 +1,5 @@
 # PAW APIBlueprint extension
-APIBlueprintImporter = ->
+APIBlueprintASTImporter = ->
 
   # Imports a blueprint.
   #
@@ -208,10 +208,4 @@ APIBlueprintImporter = ->
       throw new Error "HTTP Request failed: " + http_request.responseStatusCode
   return
 
-APIBlueprintImporter.identifier = "io.apiary.PawExtensions.APIBlueprintImporter"
-APIBlueprintImporter.title = "API Blueprint Importer"
-
-if typeof registerImporter != 'undefined'
-  registerImporter APIBlueprintImporter
-else if typeof module != 'undefined'
-  module.exports = APIBlueprintImporter
+module.exports = APIBlueprintASTImporter

@@ -1,5 +1,5 @@
 assert = require('assert')
-APIBlueprintImporter = require('../src/APIBlueprintImporter.coffee')
+APIBlueprintASTImporter = require('../src/APIBlueprintASTImporter.coffee')
 
 # Mock PAW RequestGroup
 RequestGroup = ->
@@ -49,7 +49,7 @@ describe 'API Blueprint Importer Paw Extension', ->
             }
         ],
       }
-      importer = new APIBlueprintImporter()
+      importer = new APIBlueprintASTImporter()
       @requestGroup = importer.importResourceGroup(@context, null, resourceGroup)
 
     it 'should return a request group with a name', ->
@@ -81,7 +81,7 @@ describe 'API Blueprint Importer Paw Extension', ->
         ],
       }
 
-      importer = new APIBlueprintImporter()
+      importer = new APIBlueprintASTImporter()
       @requestGroup = importer.importResource(@context, "", resource)
 
     it 'should return a request group with a name', ->
@@ -109,7 +109,7 @@ describe 'API Blueprint Importer Paw Extension', ->
             }
           ],
         }
-        importer = new APIBlueprintImporter()
+        importer = new APIBlueprintASTImporter()
         @requestGroup = importer.importResourceAction(@context, "", "", action)
 
       it 'should create a request group with a name', ->
@@ -126,7 +126,7 @@ describe 'API Blueprint Importer Paw Extension', ->
           "parameters": [],
           "examples": [],
         }
-        importer = new APIBlueprintImporter()
+        importer = new APIBlueprintASTImporter()
         @request = importer.importResourceAction(@context, "", "http://api.acme.com/message", action)
 
       it 'should return a request with a name', ->
@@ -149,7 +149,7 @@ describe 'API Blueprint Importer Paw Extension', ->
               "uriTemplate": "/other"
           }
         }
-        importer = new APIBlueprintImporter()
+        importer = new APIBlueprintASTImporter()
         @request = importer.importResourceAction(@context, "http://api.acme.com", "http://api.acme.com/message", action)
 
       it 'should return a request with a name', ->
@@ -170,7 +170,7 @@ describe 'API Blueprint Importer Paw Extension', ->
         example = {
           "name": "Awesome example",
         }
-        importer = new APIBlueprintImporter()
+        importer = new APIBlueprintASTImporter()
         @request = importer.importExample(@context, null, "GET", "http://api.acme.com/message", example)
 
       it 'should create a request with a name', ->
@@ -209,7 +209,7 @@ describe 'API Blueprint Importer Paw Extension', ->
             },
           ],
         }
-        importer = new APIBlueprintImporter()
+        importer = new APIBlueprintASTImporter()
         @requestGroup = importer.importExample(@context, null, "GET", "http://api.acme.com/message", example)
         @request = @requestGroup.children[0]
 
@@ -236,7 +236,7 @@ describe 'API Blueprint Importer Paw Extension', ->
         "body": "All your base are belong to us."
       }
 
-      importer = new APIBlueprintImporter()
+      importer = new APIBlueprintASTImporter()
       @request = importer.importExampleRequest(@context, null, "GET", "http://api.acme.com/message", exampleRequest)
 
     it 'should have a name', ->
