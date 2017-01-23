@@ -1,0 +1,55 @@
+{
+  "children": [
+    {
+      "name": "Resource",
+      "children": [
+        {
+          "name": "Transition",
+          "children": [
+            {
+              "name": "With Limits",
+              "method": "POST",
+              "url": "https://example.com/test{?limit}",
+              "headers": {}
+            },
+            {
+              "name": "Without Limits",
+              "method": "POST",
+              "url": "https://example.com/test{?limit}",
+              "headers": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transition",
+      "children": [
+        {
+          "name": "With Limits",
+          "method": "POST",
+          "url": "https://example.com/test{?limit}",
+          "headers": {}
+        },
+        {
+          "name": "Without Limits",
+          "method": "POST",
+          "url": "https://example.com/test{?limit}",
+          "headers": {}
+        }
+      ]
+    },
+    {
+      "name": "With Limits",
+      "method": "POST",
+      "url": "https://example.com/test{?limit}",
+      "headers": {}
+    },
+    {
+      "name": "Without Limits",
+      "method": "POST",
+      "url": "https://example.com/test{?limit}",
+      "headers": {}
+    }
+  ]
+}

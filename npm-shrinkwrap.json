@@ -823,7 +823,7 @@
     },
     "drafter.js": {
       "version": "2.6.4",
-      "from": "drafter.js@latest",
+      "from": "drafter.js@2.6.4",
       "resolved": "https://registry.npmjs.org/drafter.js/-/drafter.js-2.6.4.tgz",
       "dev": true
     },
@@ -944,7 +944,7 @@
     },
     "glob": {
       "version": "7.0.5",
-      "from": "glob@7.0.5",
+      "from": "glob@latest",
       "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.5.tgz",
       "dev": true
     },

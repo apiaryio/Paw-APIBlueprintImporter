@@ -1,0 +1,21 @@
+{
+  "children": [
+    {
+      "name": "Resource",
+      "children": [
+        {
+          "name": "Transaction",
+          "method": "POST",
+          "url": "https://httpbin.org/test",
+          "headers": {}
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "method": "POST",
+      "url": "https://httpbin.org/test",
+      "headers": {}
+    }
+  ]
+}

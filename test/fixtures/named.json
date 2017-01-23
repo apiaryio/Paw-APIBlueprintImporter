@@ -1,0 +1,37 @@
+{
+  "children": [
+    {
+      "name": "My Group",
+      "children": [
+        {
+          "name": "My Resource",
+          "children": [
+            {
+              "name": "My Action",
+              "method": "GET",
+              "url": "https://example.com/test",
+              "headers": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "My Resource",
+      "children": [
+        {
+          "name": "My Action",
+          "method": "GET",
+          "url": "https://example.com/test",
+          "headers": {}
+        }
+      ]
+    },
+    {
+      "name": "My Action",
+      "method": "GET",
+      "url": "https://example.com/test",
+      "headers": {}
+    }
+  ]
+}

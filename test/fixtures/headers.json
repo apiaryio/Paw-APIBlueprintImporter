@@ -1,0 +1,25 @@
+{
+  "children": [
+    {
+      "name": "Resource",
+      "children": [
+        {
+          "name": "Transaction",
+          "method": "POST",
+          "url": "https://example.com/test",
+          "headers": {
+            "Test": "Example"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "method": "POST",
+      "url": "https://example.com/test",
+      "headers": {
+        "Test": "Example"
+      }
+    }
+  ]
+}

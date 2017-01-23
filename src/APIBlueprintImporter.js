@@ -1,17 +1,21 @@
+import {Fury} from 'fury';
 import {parseSync} from 'drafter.js';
-import APIBlueprintASTImporter from './APIBlueprintASTImporter.coffee'
+import APIElementImporter from './APIElementImporter.js'
 
 @registerImporter
 export default class APIBlueprintImporter {
   static identifier = 'io.apiary.PawExtensions.APIBlueprintImporter';
   static title = 'API Blueprint Importer';
 
+  constructor() {
+    this.fury = new Fury();
+  }
+
   importString(context, string) {
-    const parseResult = parseSync(string, {type: 'ast'});
-
-    const importer = new APIBlueprintASTImporter();
-    importer.importBlueprint(context, parseResult);
-
+    const parseResult = this.fury.load(parseSync(string));
+    const importer = new APIElementImporter(context);
+    importer.importAPI(parseResult.api);
+    console.log('Imported');
     return true;
   }
 }
