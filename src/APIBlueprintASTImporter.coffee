@@ -182,30 +182,6 @@ APIBlueprintASTImporter = ->
     request.body = body
     return request
 
-  # Imports a string from Paw (Paw callback)
-  #
-  # @param [Context] context Paw context
-  # @param [String] string Payload to import
-  #
-  @importString = (context, string) ->
-    http_request = new NetworkHTTPRequest()
-    http_request.requestUrl = "https://api.apiblueprint.org/parser"
-    http_request.requestMethod = "POST"
-    http_request.requestTimeout = 3600000
-    http_request.requestBody = string
-    http_request.setRequestHeader "Content-Type", "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
-    http_request.setRequestHeader "Accept", "application/vnd.apiblueprint.parseresult+json"
-    if http_request.send()
-      blueprint = JSON.parse(http_request.responseBody)
-      if http_request.responseStatusCode is 200
-        # success. may have some warnings.
-        @importBlueprint context, blueprint
-        return true
-      else if (http_request.responseStatusCode is 422 and blueprint['error'] != null)
-        # some error happened
-        throw new Error "There are one or more errors in your blueprint. \n #{JSON.stringify(blueprint['error'])}"
-    else
-      throw new Error "HTTP Request failed: " + http_request.responseStatusCode
   return
 
 module.exports = APIBlueprintASTImporter
