@@ -1,15 +1,9 @@
 {
-  "name": "Paw-APIBlueprintGenerator",
+  "name": "Paw-APIBlueprintImporter",
   "version": "1.1.1",
-  "devDependencies": {
-    "coffee-script": "latest",
-    "mkdirp": "~0.5.0",
-    "ncp": "~1.0.1",
-    "mocha": "latest"
-  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:apiaryio/Paw-APIBlueprintGenerator.git"
+    "url": "https://github.com/apiaryio/Paw-APIBlueprintImporter"
   },
   "scripts": {
     "test": "mocha",
@@ -17,5 +11,32 @@
     "install": "cake install",
     "archive": "cake archive",
     "watch": "cake watch"
+  },
+  "dependencies": {
+    "babel-plugin-transform-flow-strip-types": "",
+    "babel-polyfill": "",
+    "babel-runtime": ""
+  },
+  "devDependencies": {
+    "babel-core": "",
+    "babel-loader": "",
+    "babel-plugin-transform-decorators": "",
+    "babel-plugin-transform-decorators-legacy": "",
+    "babel-plugin-transform-runtime": "",
+    "babel-preset-es2015": "",
+    "babel-preset-stage-0": "",
+    "babel-preset-stage-1": "",
+    "babel-preset-stage-2": "",
+    "babel-preset-stage-3": "",
+    "babel-register": "",
+    "coffee-loader": "",
+    "coffee-script": "latest",
+    "chai": "3.4.1",
+    "mocha": "2.3.4",
+    "path": "0.12.7",
+    "webpack": "^2.2.0",
+    "mkdirp": "~0.5.0",
+    "mocha": "latest",
+    "ncp": "~1.0.1"
   }
 }

@@ -10,9 +10,8 @@ extensions_dir = "#{ process.env.HOME }/Library/Containers/com.luckymarmot.Paw/D
 build_root_dir = "build"
 build_dir = "#{ build_root_dir }/#{ identifier }"
 
-# compile CoffeeScript
-build_coffee = (callback) ->
-    coffee = spawn './node_modules/.bin/coffee', ['-c', '-o', build_dir, file]
+build_webpack = (callback) ->
+    coffee = spawn './node_modules/.bin/webpack'
     coffee.stderr.on 'data', (data) ->
         process.stderr.write data.toString()
     coffee.stdout.on 'data', (data) ->
@@ -35,7 +34,7 @@ build = (callback) ->
         if err
             console.error err
         else
-            build_coffee () ->
+            build_webpack () ->
                 build_copy()
                 callback?()
 
