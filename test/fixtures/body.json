@@ -1,0 +1,27 @@
+{
+  "children": [
+    {
+      "name": "Resource",
+      "children": [
+        {
+          "name": "Transaction",
+          "method": "POST",
+          "url": "https://example.com/test",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{ \"name\": \"Hello World\" }\n"
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "method": "POST",
+      "url": "https://example.com/test",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{ \"name\": \"Hello World\" }\n"
+    }
+  ]
+}
