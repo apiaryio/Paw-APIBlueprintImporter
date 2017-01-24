@@ -32,7 +32,7 @@
     "chai": "3.4.1",
     "coffee-loader": "",
     "coffee-script": "latest",
-    "drafter.js": "^2.6.3",
+    "drafter.js": "^2.6.4",
     "mkdirp": "~0.5.0",
     "mocha": "latest",
     "ncp": "~1.0.1",

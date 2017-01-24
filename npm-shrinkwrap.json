@@ -822,9 +822,9 @@
       "dev": true
     },
     "drafter.js": {
-      "version": "2.6.3",
+      "version": "2.6.4",
       "from": "drafter.js@latest",
-      "resolved": "https://registry.npmjs.org/drafter.js/-/drafter.js-2.6.3.tgz",
+      "resolved": "https://registry.npmjs.org/drafter.js/-/drafter.js-2.6.4.tgz",
       "dev": true
     },
     "elliptic": {
