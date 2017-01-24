@@ -35,6 +35,11 @@ build = (callback) ->
             console.error err
         else
             build_webpack () ->
+                jsPath = build_dir + '/APIBlueprintImporter.js'
+                js = fs.readFileSync(jsPath, 'utf-8')
+                js = js.replace('Module["ready"]=', 'Module["ENVIRONMENT"]="WEB";Module["ready"]=')
+                fs.writeFileSync(jsPath, js)
+
                 build_copy()
                 callback?()
 

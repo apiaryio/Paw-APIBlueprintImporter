@@ -1,3 +1,4 @@
+import {parseSync} from 'drafter.js';
 import APIBlueprintASTImporter from './APIBlueprintASTImporter.coffee'
 
 @registerImporter
@@ -6,8 +7,11 @@ export default class APIBlueprintImporter {
   static title = 'API Blueprint Importer';
 
   importString(context, string) {
+    const parseResult = parseSync(string, {type: 'ast'});
+
     const importer = new APIBlueprintASTImporter();
-    importer.importString(context, string);
+    importer.importBlueprint(context, parseResult);
+
     return true;
   }
 }

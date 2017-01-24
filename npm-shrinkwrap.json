@@ -821,6 +821,12 @@
       "resolved": "https://registry.npmjs.org/domain-browser/-/domain-browser-1.1.7.tgz",
       "dev": true
     },
+    "drafter.js": {
+      "version": "2.6.4",
+      "from": "drafter.js@latest",
+      "resolved": "https://registry.npmjs.org/drafter.js/-/drafter.js-2.6.4.tgz",
+      "dev": true
+    },
     "elliptic": {
       "version": "6.3.2",
       "from": "elliptic@>=6.0.0 <7.0.0",
@@ -1457,12 +1463,6 @@
       "version": "2.2.0",
       "from": "parse-json@>=2.2.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/parse-json/-/parse-json-2.2.0.tgz",
-      "dev": true
-    },
-    "path": {
-      "version": "0.12.7",
-      "from": "path@0.12.7",
-      "resolved": "https://registry.npmjs.org/path/-/path-0.12.7.tgz",
       "dev": true
     },
     "path-browserify": {

@@ -29,14 +29,13 @@
     "babel-preset-stage-2": "",
     "babel-preset-stage-3": "",
     "babel-register": "",
+    "chai": "3.4.1",
     "coffee-loader": "",
     "coffee-script": "latest",
-    "chai": "3.4.1",
-    "mocha": "2.3.4",
-    "path": "0.12.7",
-    "webpack": "^2.2.0",
+    "drafter.js": "^2.6.4",
     "mkdirp": "~0.5.0",
     "mocha": "latest",
-    "ncp": "~1.0.1"
+    "ncp": "~1.0.1",
+    "webpack": "^2.2.0"
   }
 }

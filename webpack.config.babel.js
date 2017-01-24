@@ -9,10 +9,8 @@ module.exports = {
     filename: 'APIBlueprintImporter.js',
     path: './build/io.apiary.PawExtensions.APIBlueprintImporter'
   },
-  node: {
-    fs: 'empty'
-  },
   module: {
+    noParse: /node_modules\/drafter.js/,
     loaders: [
       {
         loader: 'coffee-loader',
