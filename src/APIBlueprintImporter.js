@@ -1,4 +1,5 @@
 import {Fury} from 'fury';
+import {detect} from 'fury-adapter-apib-parser';
 import {parseSync} from 'drafter.js';
 import APIElementImporter from './APIElementImporter.js'
 
@@ -9,6 +10,16 @@ export default class APIBlueprintImporter {
 
   constructor() {
     this.fury = new Fury();
+  }
+
+  canImport(context, items) {
+    for (const item of items) {
+      if (detect(item.content)) {
+        return true
+      }
+    }
+
+    return false;
   }
 
   importString(context, string) {
