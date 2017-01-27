@@ -7,6 +7,9 @@ import APIElementImporter from './APIElementImporter.js'
 export default class APIBlueprintImporter {
   static identifier = 'io.apiary.PawExtensions.APIBlueprintImporter';
   static title = 'API Blueprint Importer';
+  static inputs = [
+    InputField("host", "Base HOST", "String", {placeholder: "https://example.com"}),
+  ];
 
   constructor() {
     this.fury = new Fury();
@@ -22,11 +25,16 @@ export default class APIBlueprintImporter {
     return false;
   }
 
-  importString(context, string) {
-    const parseResult = this.fury.load(parseSync(string));
-    const importer = new APIElementImporter(context);
-    importer.importAPI(parseResult.api);
-    console.log('Imported');
+  import(context, items, options) {
+    const defaultHost = options.inputs['host'];
+
+    for (const item of items) {
+      console.log('Importing Item');
+      const parseResult = this.fury.load(parseSync(item.content));
+      const importer = new APIElementImporter(context, defaultHost);
+      importer.importAPI(parseResult.api);
+    }
+
     return true;
   }
 }
