@@ -1,7 +1,7 @@
 export default class APIElementImporter {
-  constructor(context) {
+  constructor(context, defaultHostname) {
     this.context = context;
-    this.base = 'https://example.com';
+    this.base = defaultHostname || 'https://example.com';
   }
 
   importAPI(api) {
