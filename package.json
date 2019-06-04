@@ -32,7 +32,6 @@
     "chai": "3.4.1",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.12.2",
-    "drafter.js": "^2.6.3",
     "fury": "^2.3.0",
     "fury-adapter-apib-parser": "^0.6.1",
     "glob": "^7.0.5",
