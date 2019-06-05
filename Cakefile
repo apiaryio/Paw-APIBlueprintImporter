@@ -38,6 +38,8 @@ build = (callback) ->
                 jsPath = build_dir + '/APIBlueprintImporter.js'
                 js = fs.readFileSync(jsPath, 'utf-8')
                 js = js.replace('Module["ready"]=', 'Module["ENVIRONMENT"]="WEB";Module["ready"]=')
+                # console.warn is not available in Paw, replace with console.log
+                js = js.replace('console.warn', 'console.log')
                 fs.writeFileSync(jsPath, js)
 
                 build_copy()

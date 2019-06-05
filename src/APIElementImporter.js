@@ -1,3 +1,17 @@
+// Takes elements as arguments and returns the value of the first
+// defined element (for example, skipping undefined elements)
+// Last argument is the default value when all elements are undefined
+function coalesceElementValue(...elements) {
+  const defaultValue = elements.pop();
+  const element = elements.find(element => element && element.toValue());
+
+  if (element) {
+    return element.toValue();
+  }
+
+  return defaultValue;
+}
+
 export default class APIElementImporter {
   constructor(context, defaultHostname) {
     this.context = context;
@@ -6,12 +20,11 @@ export default class APIElementImporter {
 
   importAPI(api) {
     // FIXME: Minim is treating object (array of member) as array
-    const meta = api.attributes.get('meta');
+    const meta = api.attributes.get('metadata');
     if (meta) {
       for (const member of meta) {
         if (member.key.content === 'HOST') {
-          const host = member.value.content;
-          this.base = host;
+          this.base = member.value.toValue();
         }
       }
     }
@@ -19,13 +32,17 @@ export default class APIElementImporter {
     for (const resourceGroup of api.resourceGroups) {
       this.importResourceGroup(resourceGroup);
     }
+
+    for (const resource of api.resources) {
+      this.importResource(resource);
+    }
   }
 
   importResourceGroup(resourceGroup) {
     console.log('Importing Resource Group');
 
     if (resourceGroup.title) {
-      const group = this.context.createRequestGroup(resourceGroup.title);
+      const group = this.context.createRequestGroup(coalesceElementValue(resourceGroup.title, 'Resource Group'));
 
       for (const resource of resourceGroup.resources) {
         const item = this.importResource(resource);
@@ -41,7 +58,7 @@ export default class APIElementImporter {
   importResource(resource) {
     console.log('Importing Resource');
 
-    const group = this.context.createRequestGroup(resource.title || 'Resource');
+    const group = this.context.createRequestGroup(coalesceElementValue(resource.title, 'Resource'));
 
     for (const transition of resource.transitions) {
       const item = this.importTransition(resource, transition);
@@ -59,7 +76,7 @@ export default class APIElementImporter {
       return this.importTransaction(resource, transition, transaction);
     }
 
-    const group = this.context.createRequestGroup(transition.title || 'Transition');
+    const group = this.context.createRequestGroup(coalesceElementValue(transition.title, 'Transition'));
 
     for (const transaction of transition.transactions) {
       const item = this.importTransaction(resource, transition, transaction);
@@ -73,17 +90,17 @@ export default class APIElementImporter {
     console.log('Importing Transaction');
 
     const request = transaction.request;
-    const url = this.createAbsoluteURL(request.href || transition.href || resource.href);
-    const pawRequest = this.context.createRequest(request.title || transition.title || 'Transaction', request.method, url);
+    const url = this.createAbsoluteURL(coalesceElementValue(request.href, transition.href, resource.href, '/unknown'));
+    const pawRequest = this.context.createRequest(coalesceElementValue(request.title, transition.title, 'Transaction'), request.method.toValue(), url);
 
     if (request.headers) {
       for (const header of request.headers) {
-        pawRequest.setHeader(header.key.content, header.value.content);
+        pawRequest.setHeader(header.key.toValue(), header.value.toValue());
       }
     }
 
     if (request.messageBody) {
-      pawRequest.body = request.messageBody.content;
+      pawRequest.body = request.messageBody.toValue();
     }
 
     return pawRequest;
