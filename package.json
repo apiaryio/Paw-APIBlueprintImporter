@@ -36,7 +36,7 @@
     "fury-adapter-apib-parser": "^0.14.0",
     "glob": "^7.0.5",
     "mkdirp": "~0.5.0",
-    "mocha": "^3.2.0",
+    "mocha": "^5.2.0",
     "ncp": "~1.0.1",
     "webpack": "^2.2.0"
   }
