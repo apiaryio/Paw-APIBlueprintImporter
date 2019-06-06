@@ -1,3 +1,5 @@
+const uritemplate = require('uri-template');
+
 // Takes elements as arguments and returns the value of the first
 // defined element (for example, skipping undefined elements)
 // Last argument is the default value when all elements are undefined
@@ -90,7 +92,19 @@ export default class APIElementImporter {
     console.log('Importing Transaction');
 
     const request = transaction.request;
-    const url = this.createAbsoluteURL(coalesceElementValue(request.href, transition.href, resource.href, '/unknown'));
+
+    const href = coalesceElementValue(request.href, transition.href, resource.href, '/unknown');
+    const hrefVariables = request.attributes.get('hrefVariables') || transition.hrefVariables || resource.hrefVariables;
+
+    let toExpand = {};
+    if (hrefVariables) {
+      toExpand = hrefVariables.valueOf();
+    }
+
+    const template = uritemplate.parse(href);
+    const expandedPath = template.expand(toExpand);
+    const url = this.createAbsoluteURL(expandedPath);
+
     const pawRequest = this.context.createRequest(coalesceElementValue(request.title, transition.title, 'Transaction'), request.method.toValue(), url);
 
     if (request.headers) {

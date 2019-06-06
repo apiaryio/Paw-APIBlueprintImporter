@@ -15,7 +15,8 @@
   "dependencies": {
     "babel-plugin-transform-flow-strip-types": "",
     "babel-polyfill": "",
-    "babel-runtime": ""
+    "babel-runtime": "",
+    "uri-template": "^1.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
