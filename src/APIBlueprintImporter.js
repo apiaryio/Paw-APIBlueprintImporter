@@ -46,8 +46,18 @@ export default class APIBlueprintImporter {
     for (const item of items) {
       console.log('Importing Item');
       const parseResult = await parse({ source: item.content, mediaType: 'text/vnd.apiblueprint' });
-      const importer = new APIElementImporter(context, defaultHost);
-      importer.importAPI(parseResult.api);
+
+      if (parseResult.api) {
+        const importer = new APIElementImporter(context, defaultHost);
+        importer.importAPI(parseResult.api);
+      }
+
+      parseResult.errors.forEach((error) => {
+        const start = error.attributes.get('sourceMap').get(0).get(0).get(0);
+        const line = start.attributes.get('line');
+        const column = start.attributes.get('column');
+        throw new Error(`${error.toValue()} on line ${line}:${column}`)
+      });
     }
 
     return true;
