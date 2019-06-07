@@ -3,9 +3,6 @@
   "env": {
     "mocha": true
   },
-  "rules": {
-    "no-restricted-syntax": "off"
-  },
   "overrides": [
     {
       "files": "*-test.js",

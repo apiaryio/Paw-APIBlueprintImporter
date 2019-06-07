@@ -16,7 +16,7 @@ fury.use(apibParser);
 describe('API Blueprint Importer', () => {
   const filenames = glob.sync(path.join(__dirname, 'fixtures', '*.apib'));
 
-  for (const filename of filenames) {
+  filenames.forEach((filename) => {
     const name = path.basename(filename, path.extname(filename));
 
     it(`can import ${name} fixture`, (done) => {
@@ -47,5 +47,5 @@ describe('API Blueprint Importer', () => {
         done();
       });
     });
-  }
+  });
 });
