@@ -5,7 +5,7 @@ const uritemplate = require('uri-template');
 // Last argument is the default value when all elements are undefined
 function coalesceElementValue(...elements) {
   const defaultValue = elements.pop();
-  const element = elements.find(element => element && element.toValue());
+  const element = elements.find(e => e && e.toValue());
 
   if (element) {
     return element.toValue();
@@ -91,7 +91,7 @@ export default class APIElementImporter {
   importTransaction(resource, transition, transaction) {
     console.log('Importing Transaction');
 
-    const request = transaction.request;
+    const { request } = transaction;
 
     const href = coalesceElementValue(request.href, transition.href, resource.href, '/unknown');
     const hrefVariables = request.attributes.get('hrefVariables') || transition.hrefVariables || resource.hrefVariables;
@@ -123,8 +123,10 @@ export default class APIElementImporter {
   createAbsoluteURL(path) {
     if (this.base.endsWith('/') && path.startsWith('/')) {
       return this.base + path.substring(1);
-    } else if (!this.base.endsWith('/') && !path.startsWith('/')) {
-      return this.base + '/' + path;
+    }
+
+    if (!this.base.endsWith('/') && !path.startsWith('/')) {
+      return `${this.base}/${path}`;
     }
 
     return this.base + path;

@@ -1,14 +1,14 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
 
-import {Fury} from 'fury';
+import { Fury } from 'fury';
 import apibParser from 'fury-adapter-apib-parser';
 
-import APIElementImporter from '../src/APIElementImporter.js';
-import Context from './paw.js';
+import APIElementImporter from '../src/APIElementImporter';
+import Context from './Context';
 
 const fury = new Fury();
 fury.use(apibParser);
@@ -26,12 +26,12 @@ describe('API Blueprint Importer', () => {
       let expectedContext;
 
       try {
-        expectedContext = require(contextFilename);
-      } catch(error) {
+        expectedContext = JSON.parse(fs.readFileSync(contextFilename, 'utf-8'));
+      } catch (error) {
         expectedContext = {};
       }
 
-      fury.parse({source}, (err, parseResult) => {
+      fury.parse({ source }, (err, parseResult) => {
         expect(err).to.be.null;
 
         const context = new Context();
