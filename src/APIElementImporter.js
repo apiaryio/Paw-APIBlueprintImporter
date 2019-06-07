@@ -24,20 +24,20 @@ export default class APIElementImporter {
     // FIXME: Minim is treating object (array of member) as array
     const meta = api.attributes.get('metadata');
     if (meta) {
-      for (const member of meta) {
+      meta.forEach((member) => {
         if (member.key.content === 'HOST') {
           this.base = member.value.toValue();
         }
-      }
+      });
     }
 
-    for (const resourceGroup of api.resourceGroups) {
+    api.resourceGroups.forEach((resourceGroup) => {
       this.importResourceGroup(resourceGroup);
-    }
+    });
 
-    for (const resource of api.resources) {
+    api.resources.forEach((resource) => {
       this.importResource(resource);
-    }
+    });
   }
 
   importResourceGroup(resourceGroup) {
@@ -46,14 +46,14 @@ export default class APIElementImporter {
     if (resourceGroup.title) {
       const group = this.context.createRequestGroup(coalesceElementValue(resourceGroup.title, 'Resource Group'));
 
-      for (const resource of resourceGroup.resources) {
+      resourceGroup.resources.forEach((resource) => {
         const item = this.importResource(resource);
         group.appendChild(item);
-      }
+      });
     } else {
-      for (const resource of resourceGroup.resources) {
+      resourceGroup.resources.forEach((resource) => {
         this.importResource(resource);
-      }
+      });
     }
   }
 
@@ -62,10 +62,10 @@ export default class APIElementImporter {
 
     const group = this.context.createRequestGroup(coalesceElementValue(resource.title, 'Resource'));
 
-    for (const transition of resource.transitions) {
+    resource.transitions.forEach((transition) => {
       const item = this.importTransition(resource, transition);
       group.appendChild(item);
-    }
+    });
 
     return group;
   }
@@ -80,10 +80,10 @@ export default class APIElementImporter {
 
     const group = this.context.createRequestGroup(coalesceElementValue(transition.title, 'Transition'));
 
-    for (const transaction of transition.transactions) {
+    transition.transactions.forEach((transaction) => {
       const item = this.importTransaction(resource, transition, transaction);
       group.appendChild(item);
-    }
+    });
 
     return group;
   }
@@ -108,9 +108,9 @@ export default class APIElementImporter {
     const pawRequest = this.context.createRequest(coalesceElementValue(request.title, transition.title, 'Transaction'), request.method.toValue(), url);
 
     if (request.headers) {
-      for (const header of request.headers) {
+      request.headers.forEach((header) => {
         pawRequest.setHeader(header.key.toValue(), header.value.toValue());
-      }
+      });
     }
 
     if (request.messageBody) {

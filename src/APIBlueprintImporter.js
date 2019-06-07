@@ -28,13 +28,15 @@ export default class APIBlueprintImporter {
   }
 
   canImport(context, items) {
-    for (const item of items) {
-      if (APIBlueprintParser.detect(item.content)) {
-        return true
-      }
-    }
+    let isAPIBlueprint = false;
 
-    return false;
+    items.forEach((item) => {
+      if (APIBlueprintParser.detect(item.content)) {
+        isAPIBlueprint = true;
+      }
+    });
+
+    return isAPIBlueprint;
   }
 
   async import(context, items, options) {
