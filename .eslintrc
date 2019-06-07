@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "no-restricted-syntax": "off"
+  },
+  "overrides": [
+    {
+      "files": "*-test.js",
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
+}
