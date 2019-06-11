@@ -2,18 +2,6 @@ import {Fury} from 'fury';
 import APIBlueprintParser from 'fury-adapter-apib-parser';
 import APIElementImporter from './APIElementImporter.js'
 
-function promisify(func, thisArg) {
-  return (...args) => new Promise((resolve, reject) => {
-    func.bind(thisArg)(...args, (err, result) => {
-      if (result) {
-        resolve(result);
-      } else {
-        reject(err);
-      }
-    });
-  });
-}
-
 @registerImporter
 export default class APIBlueprintImporter {
   static identifier = 'io.apiary.PawExtensions.APIBlueprintImporter';
@@ -42,12 +30,9 @@ export default class APIBlueprintImporter {
   async import(context, items, options) {
     const defaultHost = options.inputs['host'];
 
-    // FIXME remove promisify when https://github.com/apiaryio/api-elements.js/issues/37 is live
-    const parse = promisify(this.fury.parse, this.fury);
-
     for (const item of items) {
       console.log('Importing Item');
-      const parseResult = await parse({ source: item.content, mediaType: 'text/vnd.apiblueprint' });
+      const parseResult = await this.fury.parse({ source: item.content, mediaType: 'text/vnd.apiblueprint' });
 
       if (parseResult.api) {
         const importer = new APIElementImporter(context, defaultHost);
