@@ -94,7 +94,9 @@ export default class APIElementImporter {
     const { request } = transaction;
 
     const href = coalesceElementValue(request.href, transition.href, resource.href, '/unknown');
-    const hrefVariables = request.attributes.get('hrefVariables') || transition.hrefVariables || resource.hrefVariables;
+    const hrefVariables = (
+      request.hrefVariables || transition.hrefVariables || resource.hrefVariables
+    );
 
     let toExpand = {};
     if (hrefVariables) {
