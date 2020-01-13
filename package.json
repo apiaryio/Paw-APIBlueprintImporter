@@ -35,7 +35,7 @@
     "coffee-script": "^1.12.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-import": "^2.20.0",
     "fury": "^3.0.0-beta.12",
     "fury-adapter-apib-parser": "^0.16.0",
     "glob": "^7.0.5",
