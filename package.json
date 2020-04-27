@@ -34,7 +34,7 @@
     "chai": "^4.2.0",
     "coffee-script": "^1.12.7",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.17.3",
     "fury": "^3.0.0-beta.14",
     "fury-adapter-apib-parser": "^0.18.0",
