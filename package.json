@@ -37,7 +37,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.20.2",
     "fury": "^3.0.0-beta.14",
-    "fury-adapter-apib-parser": "^0.18.0",
+    "fury-adapter-apib-parser": "^0.18.1",
     "glob": "^7.1.6",
     "mkdirp": "~0.5.5",
     "mocha": "^7.1.2",
